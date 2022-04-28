@@ -47,16 +47,19 @@ class TestCopyJobConfig(_Base):
         create_disposition = CreateDisposition.CREATE_NEVER
         write_disposition = WriteDisposition.WRITE_TRUNCATE
         snapshot_operation = OperationType.SNAPSHOT
+        clone_operation = OperationType.CLONE
 
         config = self._get_target_class()(
             create_disposition=create_disposition,
             write_disposition=write_disposition,
             operation_type=snapshot_operation,
+            operation_type=clone_operation,
         )
 
         self.assertEqual(config.create_disposition, create_disposition)
         self.assertEqual(config.write_disposition, write_disposition)
         self.assertEqual(config.operation_type, snapshot_operation)
+        self.assertEqual(config.operation_type, clone_operation)
 
     def test_to_api_repr_with_encryption(self):
         from google.cloud.bigquery.encryption_configuration import (
